@@ -258,13 +258,13 @@ func main() {
 #### 主要操作的结构和方法
 
 - **Client** : 集中平台侧基础服务接口调用方法。
-- **(c *Client) SetLogPath(path string) error** : 设置日志输出地址 path ，并返回一个错误信息，默认为: ./sdk.log 。
-- **(c *Client) SetRequestId(requestId string) *Client** : 手动设置当前一个请求的requestId，默认自动生成。
-- **(c *Client) SetTransport(transport *http.Transport)** : 初始化后设置http连接池配置。
+- **(c \*Client) SetLogPath(path string) error** : 设置日志输出地址 path ，并返回一个错误信息，默认为: ./sdk.log 。
+- **(c \*Client) SetRequestId(requestId string) \*Client** : 手动设置当前一个请求的requestId，默认自动生成。
+- **(c \*Client) SetTransport(transport \*http.Transport)** : 初始化后设置http连接池配置。
 
 1. 获取访问令牌
 
-   - **(c *Client) ObtainBoxRegKey(input *ObtainBoxRegKeyRequest) ( *ObtainBoxRegKeyResponse, error)**
+   - **(c \*Client) ObtainBoxRegKey(input \*ObtainBoxRegKeyRequest) ( \*ObtainBoxRegKeyResponse, error)**
 
      获取访问令牌的功能方法，接收一个 *ObtainBoxRegKeyRequest 类型参数并返回响应信息或错误信息。
 
