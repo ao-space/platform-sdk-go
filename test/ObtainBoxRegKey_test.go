@@ -22,7 +22,7 @@ func TestObtainBoxRegKey(t *testing.T) {
 
 	client = platform.NewClientWithHost("xxx", tr)
 
-	resp, err := client.SetRequestID("1111").ObtainBoxRegKey(&platform.ObtainBoxRegKeyRequest{
+	resp, err := client.SetRequestId("1111").ObtainBoxRegKey(&platform.ObtainBoxRegKeyRequest{
 		BoxUUID:    "xxx",
 		ServiceIds: []string{"xxx"},
 	})

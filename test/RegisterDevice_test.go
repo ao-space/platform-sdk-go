@@ -8,7 +8,7 @@ import (
 
 func TestRegisterDevice(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
-	resp, err := client.SetRequestID("xxx").RegisterDevice()
+	resp, err := client.SetRequestId("xxx").RegisterDevice()
 	require.NoError(t, err)
 	require.Contains(t, utils.ToString(resp), "networkClient")
 }

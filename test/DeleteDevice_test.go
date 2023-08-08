@@ -7,5 +7,5 @@ import (
 
 func TestDeleteDevice(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
-	require.NoError(t, client.SetRequestID("xxx").DeleteDevice())
+	require.NoError(t, client.SetRequestId("xxx").DeleteDevice())
 }

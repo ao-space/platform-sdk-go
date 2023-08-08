@@ -37,7 +37,11 @@ func (c *Client) SetHost(Host string) {
 	c.BaseURL = "https://" + Host + "/" + ApiVersion
 }
 
-func (c *Client) SetRequestID(requestID string) *Client {
-	c.Operation.RequestId = requestID
+func (c *Client) SetRequestId(requestId string) *Client {
+	c.Operation.RequestId = requestId
 	return c
+}
+
+func (c *Client) SetTransport(transport *http.Transport) {
+	c.HttpClient.Transport = transport
 }
