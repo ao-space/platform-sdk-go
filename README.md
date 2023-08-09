@@ -236,9 +236,9 @@ func main() {
     	}})
     ```
 
-### [API参考](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#API参考)
+### API参考
 
-- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#SDK初始化和配置)
-- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#主要操作的结构和方法)
-- [常量](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#常量)
-- [错误类型](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#错误类型)
+- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#1. SDK初始化和配置)
+- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#2. 主要操作的结构和方法)
+- [常量](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#3. 常量)
+- [错误类型](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#4. 错误类型)
