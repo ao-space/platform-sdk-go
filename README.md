@@ -238,7 +238,7 @@ func main() {
 
 ### API参考
 
-- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#1. SDK初始化和配置)
-- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#2. 主要操作的结构和方法)
-- [常量](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#3. 常量)
-- [错误类型](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API参考.md#4. 错误类型)
+- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API%E5%8F%82%E8%80%83.md#1-sdk%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE)
+- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API%E5%8F%82%E8%80%83.md#2-%E4%B8%BB%E8%A6%81%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%B9%E6%B3%95)
+- [常量](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API%E5%8F%82%E8%80%83.md#3-%E5%B8%B8%E9%87%8F)
+- [错误类型](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/API%E5%8F%82%E8%80%83.md#4-%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B)
