@@ -57,7 +57,7 @@ func main() {
 
 ## 文档
 
-### SDK功能详解
+### SDK功能示例
 
 1. 获取访问令牌
 
@@ -236,69 +236,10 @@ func main() {
     	}})
     ```
 
-### API参考
+### [API参考](https://github.com/big-dust/platform-sdk-go/docs/API%E5%8F%82%E8%80%83.md#API参考)
 
-#### SDK初始化
+- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/docs/API%E5%8F%82%E8%80%83.md#SDK初始化和配置)
+- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/docs/API%E5%8F%82%E8%80%83.md#主要操作的结构和方法)
+- [常量](https://github.com/big-dust/platform-sdk-go/docs/API%E5%8F%82%E8%80%83.md#常量)
+- [错误类型](https://github.com/big-dust/platform-sdk-go/docs/API%E5%8F%82%E8%80%83.md#错误类型)
 
-- **NewClientWithHost(Host string, transport *http.Transport) *Client**：创建一个用于调用接口的client实例。
-
-  **Host**: 平台侧服务主机域名。
-
-  **transport**: http的连接池配置，默认参数为：
-
-  ```go
-  transport := &http.Transport{
-  	MaxIdleConns:        5,               
-  	MaxIdleConnsPerHost: 2,               
-  	IdleConnTimeout:     30 * time.Second, 
-  	TLSHandshakeTimeout: 10 * time.Second, 
-  }
-  ```
-
-#### 主要操作的结构和方法
-
-- **Client** : 集中平台侧基础服务接口调用方法。
-- **(c \*Client) SetLogPath(path string) error** : 设置日志输出地址 path ，并返回一个错误信息，默认为: ./sdk.log 。
-- **(c \*Client) SetRequestId(requestId string) \*Client** : 手动设置当前一个请求的requestId，默认自动生成。
-- **(c \*Client) SetTransport(transport \*http.Transport)** : 初始化后设置http连接池配置。
-
-1. 获取访问令牌
-
-   - **(c \*Client) ObtainBoxRegKey(input \*ObtainBoxRegKeyRequest) ( \*ObtainBoxRegKeyResponse, error)**
-
-     获取访问令牌的功能方法，接收一个 *ObtainBoxRegKeyRequest 类型参数并返回响应信息或错误信息。
-
-   - **ObtainBoxRegKeyRequest**
-
-     ```go
-     type ObtainBoxRegKeyRequest struct {
-     	BoxUUID    string   `json:"boxUUID"` 	   //设备的 UUID
-     	ServiceIds []string `json:"serviceIds"`    //平台id：空间平台（serviceId=10001）
-     	Sign       string   `json:"sign,optional"` //签名，使用公钥验证设备身份时必传
-     }
-     ```
-
-   - **ObtainBoxRegKeyResponse**
-
-     ```go
-     type ObtainBoxRegKeyResponse struct {
-     	BoxUUID      string         `json:"boxUUID"`      //设备的 UUID
-     	TokenResults []tokenResults `json:"tokenResults"` //设备的访问令牌
-     }
-     ```
-
-   - **tokenResults**
-
-     ```go
-     type tokenResults struct {
-     	ServiceId string    `json:"serviceId"` //平台id
-     	BoxRegKey string    `json:"boxRegKey"` //设备的访问令牌
-     	ExpiresAt time.Time `json:"expiresAt"` //令牌有效时间
-     }
-     ```
-
-#### 辅助函数
-
-#### 常量
-
-#### 错误类型
