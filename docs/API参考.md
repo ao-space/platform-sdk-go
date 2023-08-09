@@ -223,7 +223,7 @@
 
 #### 2.10 空间平台迁入
 
-- **(c *Client) SpacePlatformMigration(input \*SpacePlatformMigrationRequest) (\*SpacePlatformMigrationResponse, error)**
+- **(c \*Client) SpacePlatformMigration(input \*SpacePlatformMigrationRequest) (\*SpacePlatformMigrationResponse, error)**
 
   向空间平台迁入的功能方法。
 
@@ -268,7 +268,7 @@
 
 #### 2.11 空间平台迁出
 
-- **(c \*Client) SpacePlatformMigrationOut(input \*SpacePlatformMigrationOutRequest) (*SpacePlatformMigrationOutResponse, error)** 
+- **(c \*Client) SpacePlatformMigrationOut(input \*SpacePlatformMigrationOutRequest) (\*SpacePlatformMigrationOutResponse, error)** 
 
   迁出空间平台的功能方法。
 
