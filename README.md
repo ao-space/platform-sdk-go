@@ -241,8 +241,8 @@ func main() {
 
 ### API Reference
 
-- [SDK Initialization and Configuration](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API Reference.md#1-SDK Initialization and Configuration)
-- [Main Operation Structures and Methods](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API Reference.md#2-Main Operation Structures and Methods)
-- [Constants](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API Reference.md#3-Constants)
-- [Error Code](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API Reference.md#4-Error Code)
+- [SDK Initialization and Configuration](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#1-sdk-initialization-and-configuration)
+- [Main Operation Structures and Methods](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#2-main-operation-structures-and-methods)
+- [Constants](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#3-constants)
+- [Error Code](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#4-error-code)
 
