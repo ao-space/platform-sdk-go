@@ -9,11 +9,6 @@ import (
 )
 
 func GetBody(resp *http.Response, body interface{}) error {
-	if resp == nil {
-		return fmt.Errorf("response is nil")
-	} else if resp.Body == nil {
-		return fmt.Errorf("body is nil")
-	}
 	var respBody bytes.Buffer
 	_, err := io.Copy(&respBody, resp.Body)
 	if err != nil {
@@ -24,7 +19,7 @@ func GetBody(resp *http.Response, body interface{}) error {
 		if err = json.Unmarshal([]byte(respBody.String()), &Err); err != nil {
 			return err
 		}
-		return &Err
+		return fmt.Errorf("%v: %v", Err.Code, Err.Message)
 	}
 	if err = json.Unmarshal([]byte(respBody.String()), body); err != nil {
 		return err
