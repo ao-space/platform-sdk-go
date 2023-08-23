@@ -8,9 +8,16 @@ import (
 
 // DeleteDevice 删除设备
 func (c *Client) DeleteDevice() error {
-	path := fmt.Sprintf("/platform/boxes/%v", c.BoxUUID)
-	c.SetOperation(http.MethodDelete, c.BaseURL+path)
-	resp, err := c.Send(c.Operation, nil)
+	if !c.IsAvailable(uriDeleteDevice, http.MethodDelete) {
+		return fmt.Errorf("the ability is not available: [%v] %v ", http.MethodDelete, uriDeleteDevice)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v", c.BoxUUID)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodDelete, url)
+
+	resp, err := c.Send(op, nil)
 	if err != nil {
 		return err
 	}

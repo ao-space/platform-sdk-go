@@ -31,10 +31,17 @@ type SpacePlatformMigrationResponse struct {
 }
 
 func (c *Client) SpacePlatformMigration(input *SpacePlatformMigrationRequest) (*SpacePlatformMigrationResponse, error) {
+	if !c.IsAvailable(uriSpacePlatformMigration, http.MethodPost) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriSpacePlatformMigration)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v/migration", c.BoxUUID)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPost, url)
+
 	requestBody, _ := json.Marshal(input)
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/migration", c.BoxUUID)
-	c.SetOperation(http.MethodPost, URL)
-	resp, err := c.Send(c.Operation, requestBody)
+	resp, err := c.Send(op, requestBody)
 	if err != nil {
 		return nil, err
 	}

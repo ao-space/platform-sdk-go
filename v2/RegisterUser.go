@@ -23,13 +23,17 @@ type RegisterUserResponse struct {
 }
 
 func (c *Client) RegisterUser(input *RegisterUserRequest) (*RegisterUserResponse, error) {
-	requestBody, err := json.Marshal(input)
-	if err != nil {
-		return nil, err
+	if !c.IsAvailable(uriRegisterUser, http.MethodPost) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriRegisterUser)
 	}
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/users", c.BoxUUID)
-	c.SetOperation(http.MethodPost, URL)
-	response, err := c.Send(c.Operation, requestBody)
+	uri := fmt.Sprintf("/platform/boxes/%v/users", c.BoxUUID)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPost, url)
+
+	requestBody, _ := json.Marshal(input)
+	response, err := c.Send(op, requestBody)
 	if err != nil {
 		return nil, err
 	}

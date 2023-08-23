@@ -12,13 +12,13 @@ func TestRegisterUser(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
 	resp, err := client.RegisterUser(&platform.RegisterUserRequest{
 		UserID:     "xxx",
-		Subdomain:  "xxx",
+		Subdomain:  "",
 		UserType:   "user_admin",
 		ClientUUID: uuid.New().String(),
 	})
 	resp, err = client.RegisterUser(&platform.RegisterUserRequest{
 		UserID:     "xxx",
-		Subdomain:  "xxx",
+		Subdomain:  "",
 		UserType:   "user_member",
 		ClientUUID: uuid.New().String(),
 	})

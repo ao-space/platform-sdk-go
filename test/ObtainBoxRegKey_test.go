@@ -20,11 +20,11 @@ func TestObtainBoxRegKey(t *testing.T) {
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 
-	client = platform.NewClientWithHost("xxx", tr)
+	client, _ = platform.NewClientWithHost(platform.AoSpaceDomain, tr)
 
 	resp, err := client.SetRequestId("1111").ObtainBoxRegKey(&platform.ObtainBoxRegKeyRequest{
-		BoxUUID:    "xxx",
-		ServiceIds: []string{"xxx"},
+		BoxUUID:    "364b553c01dabb2764b2f2c0e721c1e860e308b1c7daed2671507d21434060ed",
+		ServiceIds: []string{"10001"},
 	})
 
 	require.NoError(t, err)

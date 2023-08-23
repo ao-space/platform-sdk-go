@@ -2,6 +2,7 @@ package platform
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/ao-space/platform-sdk-go/utils"
 	"net/http"
 	"time"
@@ -26,9 +27,17 @@ type tokenResults struct {
 
 // GetBoxRegKey 获取访问令牌
 func (c *Client) ObtainBoxRegKey(input *ObtainBoxRegKeyRequest) (*ObtainBoxRegKeyResponse, error) {
+	if !c.IsAvailable(uriObtainBoxRegKey, http.MethodPost) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriObtainBoxRegKey)
+	}
+	uri := "/platform/auth/box_reg_keys"
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPost, url)
+
 	requestBody, _ := json.Marshal(input)
-	c.SetOperation(http.MethodPost, c.BaseURL+"/platform/auth/box_reg_keys")
-	resp, err := c.Send(c.Operation, requestBody)
+	resp, err := c.Send(op, requestBody)
 	output := ObtainBoxRegKeyResponse{}
 	if err = utils.GetBody(resp, &output); err != nil {
 		return nil, err

@@ -1,6 +1,6 @@
 package platform
 
 const (
-	ApiVersion    = "v2"
+	ApiVersion    = 2
 	AoSpaceDomain = "ao.space"
 )

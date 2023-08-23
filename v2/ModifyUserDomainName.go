@@ -23,10 +23,17 @@ type ModifyUserDomainResponse struct {
 }
 
 func (c *Client) ModifyUserDomain(input *ModifyUserDomainRequest) (*ModifyUserDomainResponse, error) {
+	if !c.IsAvailable(uriModifyUserDomainName, http.MethodPut) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPut, uriModifyUserDomainName)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v/users/%v/subdomain", c.BoxUUID, input.UserId)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPut, url)
+
 	requestBody, _ := json.Marshal(input)
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/users/%v/subdomain", c.BoxUUID, input.UserId)
-	c.SetOperation(http.MethodPut, URL)
-	resp, err := c.Send(c.Operation, requestBody)
+	resp, err := c.Send(op, requestBody)
 	if err != nil {
 		return nil, err
 	}

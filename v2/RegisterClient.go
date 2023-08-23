@@ -21,10 +21,17 @@ type RegisterClientResponse struct {
 }
 
 func (c *Client) RegisterClient(input *RegisterClientRequest) (*RegisterClientResponse, error) {
+	if !c.IsAvailable(uriRegisterClient, http.MethodPost) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriRegisterClient)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v/users/%v/clients", c.BoxUUID, input.UserId)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPost, url)
+
 	requestBody, _ := json.Marshal(input)
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/users/%v/clients", c.BoxUUID, input.UserId)
-	c.SetOperation(http.MethodPost, URL)
-	resp, err := c.Send(c.Operation, requestBody)
+	resp, err := c.Send(op, requestBody)
 	if err != nil {
 		return nil, err
 	}

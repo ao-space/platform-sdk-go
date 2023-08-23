@@ -12,12 +12,20 @@ type DeleteClientRequest struct {
 }
 
 func (c *Client) DeleteClient(input *DeleteClientRequest) error {
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/users/%v/clients/%v", c.BoxUUID, input.UserId, input.ClientUUID)
-	c.SetOperation(http.MethodDelete, URL)
-	resp, err := c.Send(c.Operation, nil)
+	if !c.IsAvailable(uriDeleteClient, http.MethodDelete) {
+		return fmt.Errorf("the ability is not available: [%v] %v ", http.MethodDelete, uriDeleteClient)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v/users/%v/clients/%v", c.BoxUUID, input.UserId, input.ClientUUID)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodDelete, url)
+	resp, err := c.Send(op, nil)
+
 	if err != nil {
 		return err
 	}
+
 	if resp.StatusCode != http.StatusNoContent {
 		err = utils.GetBody(resp, nil)
 		return err

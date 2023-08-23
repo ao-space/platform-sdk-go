@@ -18,13 +18,21 @@ type GenerateUserDomainResponse struct {
 }
 
 func (c *Client) GenerateUserDomain(input *GenerateUserDomainRequest) (*GenerateUserDomainResponse, error) {
+	if !c.IsAvailable(uriGenerateUserDomainName, http.MethodPost) {
+		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriGenerateUserDomainName)
+	}
+	uri := fmt.Sprintf("/platform/boxes/%v/subdomains", c.BoxUUID)
+
+	url := c.BaseUrl + uri
+	op := new(Operation)
+	op.SetOperation(http.MethodPost, url)
+
 	requestBody, _ := json.Marshal(input)
-	URL := c.BaseURL + fmt.Sprintf("/platform/boxes/%v/subdomains", c.BoxUUID)
-	c.SetOperation(http.MethodPost, URL)
-	resp, err := c.Send(c.Operation, requestBody)
+	resp, err := c.Send(op, requestBody)
 	if err != nil {
 		return nil, err
 	}
+
 	output := GenerateUserDomainResponse{}
 	err = utils.GetBody(resp, &output)
 	if err != nil {
