@@ -1,4 +1,4 @@
-English | [简体中文](https://github.com/big-dust/platform-sdk-go/blob/dev/README_zh.md)
+English | [简体中文](https://github.com/big-dust/platform-sdk-go/blob/dev/README_cn.md)
 
 # platform-sdk-go
 
