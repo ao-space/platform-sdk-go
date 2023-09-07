@@ -236,6 +236,28 @@ func main() {
     			UserDomainRedirect: "XXX", //重定向的用户域名
     		},
     	}})
+    if err != nil {
+    	fmt.Println(err)
+    	return
+    }
+    ```
+
+12. 获取平台能力
+
+    - 用户获取平台所具有的api
+
+    ```go
+    resp, err := client.GetAbility()
+    if err != nil {
+    	fmt.Println(err)
+    	return
+    }
+    ```
+
+13. 定时刷新平台的能力
+
+    ```go
+    go client.FlushAbilityWithDuration(time.Minute)()
     ```
 
 ### API参考

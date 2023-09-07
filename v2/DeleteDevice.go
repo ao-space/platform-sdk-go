@@ -11,6 +11,7 @@ func (c *Client) DeleteDevice() error {
 	if !c.IsAvailable(uriDeleteDevice, http.MethodDelete) {
 		return fmt.Errorf("the ability is not available: [%v] %v ", http.MethodDelete, uriDeleteDevice)
 	}
+
 	uri := fmt.Sprintf("/platform/boxes/%v", c.BoxUUID)
 
 	url := c.BaseUrl + uri

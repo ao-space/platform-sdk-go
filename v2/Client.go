@@ -15,6 +15,7 @@ const (
 	JSON      = "application/json"
 	UserAgent = "go-sdk-v2"
 	NULL      = ""
+	HTTPS     = "https"
 )
 
 type Client struct {
@@ -23,18 +24,13 @@ type Client struct {
 	BoxRegKey  string
 	RequestId  string
 	BaseUrl    string
-	Ability    *Ability
+	Ability    map[string]map[string]map[int]int
 	mu         sync.Mutex
-}
-
-type Ability struct {
-	PlatformApis []Api
-	mu           sync.Mutex
 }
 
 type Operation struct {
 	Method string
-	Uri    string
+	Url    string
 }
 
 // NewClientWithHost Host 是服务所在主机  transport 是连接池相关的配置
@@ -52,7 +48,6 @@ func NewClientWithHost(Host string, transport *http.Transport) (*Client, error) 
 
 	c := &Client{
 		HttpClient: &http.Client{},
-		Ability:    &Ability{},
 		mu:         sync.Mutex{},
 	}
 
@@ -68,6 +63,7 @@ func NewClientWithHost(Host string, transport *http.Transport) (*Client, error) 
 }
 
 func (c *Client) SetHost(Host string) {
+
 	c.BaseUrl = "https://" + Host + "/v" + strconv.Itoa(ApiVersion)
 }
 
@@ -80,9 +76,9 @@ func (c *Client) SetTransport(transport *http.Transport) {
 	c.HttpClient.Transport = transport
 }
 
-func (op *Operation) SetOperation(method string, Uri string) {
+func (op *Operation) SetOperation(method string, Url string) {
 	op.Method = method
-	op.Uri = Uri
+	op.Url = Url
 }
 
 func (c *Client) SetLogPath(path string) error {
@@ -103,7 +99,7 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 		body = strings.NewReader(string(input))
 	}
 
-	request, _ := http.NewRequest(op.Method, op.Uri, body)
+	request, _ := http.NewRequest(op.Method, op.Url, body)
 
 	request.Header.Set("Accept", JSON)
 	request.Header.Set("Content-Type", JSON)
@@ -119,9 +115,7 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 		request.Header.Set("Box-Reg-key", c.BoxRegKey)
 	}
 
-	c.mu.Lock()
 	response, err := c.HttpClient.Do(request)
-	c.mu.Unlock()
 
 	if err != nil || response.StatusCode != http.StatusOK && response.StatusCode != http.StatusNoContent {
 		Logger.Error(time.Now().String()+": "+"request: ", request, " response: ", response)

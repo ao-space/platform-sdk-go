@@ -11,6 +11,7 @@ func (c *Client) DeleteUser(userID string) error {
 	if !c.IsAvailable(uriDeleteUser, http.MethodDelete) {
 		return fmt.Errorf("the ability is not available: [%v] %v ", http.MethodDelete, uriDeleteUser)
 	}
+
 	uri := fmt.Sprintf("/platform/boxes/%v/users/%v", c.BoxUUID, userID)
 
 	url := c.BaseUrl + uri

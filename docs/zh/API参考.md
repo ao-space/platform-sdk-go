@@ -298,6 +298,33 @@
   }
   ```
 
+#### 2.12 获取平台能力
+
+- **(c \*Client) GetAbility() (\*GetAbilityResponse, error)**
+
+- **GetAbilityResponse**
+
+  ```go
+  type GetAbilityResponse struct {
+     PlatformApis []Api `json:"platformApis"` //平台具有的api信息列表
+  }
+  ```
+
+- **Api**
+
+  ```go
+  type Api struct {
+     Method             string `json:"method"`
+     Uri                string `json:"uri"`
+     BriefUri           string `json:"briefUri"`
+     CompatibleVersions []int  `json:"compatibleVersions"` 
+     Type               string `json:"type"`
+     Desc               string `json:"desc"`
+  }
+  
+  
+  ```
+
 ## 3. 常量
 
 - **ApiVersion**：api版本

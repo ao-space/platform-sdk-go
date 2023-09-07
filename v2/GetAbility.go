@@ -3,7 +3,6 @@ package platform
 import (
 	"github.com/ao-space/platform-sdk-go/utils"
 	"net/http"
-	"strings"
 	"time"
 )
 
@@ -41,9 +40,23 @@ func (c *Client) GetAbility() (*GetAbilityResponse, error) {
 		return nil, err
 	}
 
-	c.Ability.mu.Lock()
-	c.Ability.PlatformApis = output.PlatformApis
-	c.Ability.mu.Unlock()
+	ability := make(map[string]map[string]map[int]int)
+
+	for _, api := range output.PlatformApis {
+		if ability[api.Uri] == nil {
+			ability[api.Uri] = make(map[string]map[int]int)
+		}
+		if ability[api.Uri][api.Method] == nil {
+			ability[api.Uri][api.Method] = make(map[int]int)
+		}
+		for _, version := range api.CompatibleVersions {
+			ability[api.Uri][api.Method][version] = 1
+		}
+	}
+
+	c.mu.Lock()
+	c.Ability = ability
+	c.mu.Unlock()
 
 	return &output, nil
 }
@@ -60,19 +73,6 @@ func (c *Client) FlushAbilityWithDuration(duration time.Duration) func() {
 	}
 }
 
-func (c *Client) IsAvailable(Uri string, method string) bool {
-	for _, api := range c.Ability.PlatformApis {
-		if api.Uri != Uri {
-			continue
-		}
-		if api.Method != strings.ToLower(method) {
-			continue
-		}
-		for _, compatibleVersion := range api.CompatibleVersions {
-			if compatibleVersion == ApiVersion {
-				return true
-			}
-		}
-	}
-	return false
+func (c *Client) IsAvailable(uri string, method string) bool {
+	return c.Ability[uri][method][ApiVersion] == 1
 }
