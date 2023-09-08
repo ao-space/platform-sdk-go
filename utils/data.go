@@ -11,21 +11,21 @@ func GetBody(resp *http.Response, body interface{}) error {
 	var respBody bytes.Buffer
 	_, err := io.Copy(&respBody, resp.Body)
 	if err != nil {
-		return err
+		return NewError(err.Error())
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		var Err Error
-		if err = json.Unmarshal([]byte(respBody.String()), &Err); err != nil {
+		Err := new(Error)
+		if err = json.Unmarshal([]byte(respBody.String()), Err); err != nil {
 			return err
 		}
-		return &Err
+		return Err
 	}
 
 	if err = json.Unmarshal([]byte(respBody.String()), body); err != nil {
-		return err
+		return NewError(err.Error())
 	}
-	
+
 	return nil
 }
 

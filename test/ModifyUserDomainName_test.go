@@ -11,7 +11,7 @@ func TestModifyUserDomainName(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
 	resp, err := client.ModifyUserDomain(&platform.ModifyUserDomainRequest{
 		UserId:    "1",
-		Subdomain: "user-one",
+		Subdomain: "user_one",
 	})
 	require.NoError(t, err)
 	require.Contains(t, utils.ToString(resp), "\"success\":true")

@@ -1,6 +1,7 @@
 package platform
 
 import (
+	"github.com/ao-space/platform-sdk-go/utils"
 	"github.com/google/uuid"
 	"io"
 	"net/http"
@@ -137,7 +138,7 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 	}
 
 	if err != nil {
-		return nil, err
+		return nil, utils.NewError(err.Error())
 	}
 
 	c.RequestId = NULL
