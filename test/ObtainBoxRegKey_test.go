@@ -19,10 +19,10 @@ func TestObtainBoxRegKey(t *testing.T) {
 		MaxIdleConns:    20,
 	}
 
-	client, _ := platform.NewClientWithHost("platform.muxixyz.com", tr)
+	client, _ = platform.NewClientWithHost("platform.muxixyz.com", tr)
 
-	resp, err := client.SetRequestId("1111").ObtainBoxRegKey(&platform.ObtainBoxRegKeyRequest{
-		BoxUUID:    "364b553c01dabb2764b2f2c0e721c1e860e308b1c7daed2671507d21434060ed",
+	resp, err := client.ObtainBoxRegKey(&platform.ObtainBoxRegKeyRequest{
+		BoxUUID:    "1",
 		ServiceIds: []string{"10001"},
 	})
 

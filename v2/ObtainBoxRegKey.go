@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/jinzhu/copier"
 	"net/http"
+	"net/url"
 	"time"
 )
 
@@ -30,19 +32,26 @@ func (c *Client) ObtainBoxRegKey(input *ObtainBoxRegKeyRequest) (*ObtainBoxRegKe
 	if !c.IsAvailable(uriObtainBoxRegKey, http.MethodPost) {
 		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriObtainBoxRegKey)
 	}
-	uri := "/platform/auth/box_reg_keys"
+	
+	path := "/platform/auth/box_reg_keys"
 
-	url := c.BaseUrl + uri
+	URL := new(url.URL)
+	copier.Copy(URL, c.BaseURL)
+	URL = URL.JoinPath(path)
+
 	op := new(Operation)
-	op.SetOperation(http.MethodPost, url)
+	op.SetOperation(http.MethodPost, URL)
 
 	requestBody, _ := json.Marshal(input)
 	resp, err := c.Send(op, requestBody)
-	output := ObtainBoxRegKeyResponse{}
-	if err = utils.GetBody(resp, &output); err != nil {
+
+	output := new(ObtainBoxRegKeyResponse)
+	if err = utils.GetBody(resp, output); err != nil {
 		return nil, err
 	}
+
 	c.BoxUUID = output.BoxUUID
 	c.BoxRegKey = output.TokenResults[0].BoxRegKey
-	return &output, nil
+
+	return output, nil
 }

@@ -2,7 +2,9 @@ package platform
 
 import (
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/jinzhu/copier"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -22,11 +24,14 @@ type GetAbilityResponse struct {
 
 func (c *Client) GetAbility() (*GetAbilityResponse, error) {
 
-	uri := "/platform/ability"
+	path := "/platform/ability"
 
-	url := c.BaseUrl + uri
+	URL := new(url.URL)
+	copier.Copy(URL, c.BaseURL)
+	URL = URL.JoinPath(path)
+
 	op := new(Operation)
-	op.SetOperation(http.MethodGet, url)
+	op.SetOperation(http.MethodGet, URL)
 
 	response, err := c.Send(op, nil)
 

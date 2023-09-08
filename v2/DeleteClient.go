@@ -3,7 +3,9 @@ package platform
 import (
 	"fmt"
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/jinzhu/copier"
 	"net/http"
+	"net/url"
 )
 
 type DeleteClientRequest struct {
@@ -15,11 +17,14 @@ func (c *Client) DeleteClient(input *DeleteClientRequest) error {
 	if !c.IsAvailable(uriDeleteClient, http.MethodDelete) {
 		return fmt.Errorf("the ability is not available: [%v] %v ", http.MethodDelete, uriDeleteClient)
 	}
-	uri := fmt.Sprintf("/platform/boxes/%v/users/%v/clients/%v", c.BoxUUID, input.UserId, input.ClientUUID)
 
-	url := c.BaseUrl + uri
+	path := fmt.Sprintf("platform/boxes/%v/users/%v/clients/%v", c.BoxUUID, input.UserId, input.ClientUUID)
+	URL := new(url.URL)
+	copier.Copy(URL, c.BaseURL)
+	URL = URL.JoinPath(path)
+
 	op := new(Operation)
-	op.SetOperation(http.MethodDelete, url)
+	op.SetOperation(http.MethodDelete, URL)
 	resp, err := c.Send(op, nil)
 
 	if err != nil {

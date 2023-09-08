@@ -9,7 +9,7 @@ import (
 func TestGenerateUserDomainName(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
 	resp, err := client.GenerateUserDomain(&platform.GenerateUserDomainRequest{
-		EffectiveTime: "XXX",
+		EffectiveTime: 12,
 	})
 	require.NoError(t, err)
 	require.NotEmpty(t, resp)

@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/jinzhu/copier"
 	"net/http"
+	"net/url"
 )
 
 type SpacePlatformMigrationRequest struct {
@@ -34,11 +36,14 @@ func (c *Client) SpacePlatformMigration(input *SpacePlatformMigrationRequest) (*
 	if !c.IsAvailable(uriSpacePlatformMigration, http.MethodPost) {
 		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriSpacePlatformMigration)
 	}
-	uri := fmt.Sprintf("/platform/boxes/%v/migration", c.BoxUUID)
+	path := fmt.Sprintf("/platform/boxes/%v/migration", c.BoxUUID)
 
-	url := c.BaseUrl + uri
+	URL := new(url.URL)
+	copier.Copy(URL, c.BaseURL)
+	URL = URL.JoinPath(path)
+
 	op := new(Operation)
-	op.SetOperation(http.MethodPost, url)
+	op.SetOperation(http.MethodPost, URL)
 
 	requestBody, _ := json.Marshal(input)
 	resp, err := c.Send(op, requestBody)

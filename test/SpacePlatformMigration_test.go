@@ -13,12 +13,12 @@ func TestSpacePlatformMigrate(t *testing.T) {
 		NetworkClientId: "xxx",
 		UserInfos: []platform.UserMigrationInfo{
 			platform.UserMigrationInfo{
-				UserId:     "xxx",
-				UserDomain: "xxx",
+				UserId:     "1",
+				UserDomain: "user-one",
 				UserType:   "user_admin",
 				ClientInfos: []platform.ClientInfo{
 					platform.ClientInfo{
-						ClientUUID: "xxx",
+						ClientUUID: "1",
 						ClientType: "client_auth",
 					},
 				},

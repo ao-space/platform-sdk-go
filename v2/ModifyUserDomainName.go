@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/jinzhu/copier"
 	"net/http"
+	"net/url"
 )
 
 type ModifyUserDomainRequest struct {
@@ -26,11 +28,14 @@ func (c *Client) ModifyUserDomain(input *ModifyUserDomainRequest) (*ModifyUserDo
 	if !c.IsAvailable(uriModifyUserDomainName, http.MethodPut) {
 		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPut, uriModifyUserDomainName)
 	}
-	uri := fmt.Sprintf("/platform/boxes/%v/users/%v/subdomain", c.BoxUUID, input.UserId)
+	path := fmt.Sprintf("/platform/boxes/%v/users/%v/subdomain", c.BoxUUID, input.UserId)
 
-	url := c.BaseUrl + uri
+	URL := new(url.URL)
+	copier.Copy(URL, c.BaseURL)
+	URL = URL.JoinPath(path)
+
 	op := new(Operation)
-	op.SetOperation(http.MethodPut, url)
+	op.SetOperation(http.MethodPut, URL)
 
 	requestBody, _ := json.Marshal(input)
 	resp, err := c.Send(op, requestBody)

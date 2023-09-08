@@ -24,7 +24,7 @@ type Client struct {
 	BoxUUID    string
 	BoxRegKey  string
 	RequestId  string
-	BaseUrl    string
+	BaseURL    *url.URL
 	Ability    map[string]map[string]map[int]int
 	mu         sync.Mutex
 }
@@ -71,11 +71,13 @@ func (c *Client) SetBaseUrl(Host string) {
 
 	URL, _ := url.Parse(Host)
 	if !URL.IsAbs() {
-		c.BaseUrl = "https://" + Host + "/v" + strconv.Itoa(ApiVersion)
-		return
+		URL.Scheme = HTTPS
+		URL.Host = Host
 	}
 
-	c.BaseUrl = Host + "/v" + strconv.Itoa(ApiVersion)
+	URL.Path = "/v" + strconv.Itoa(ApiVersion)
+
+	c.BaseURL = URL
 }
 
 func (c *Client) SetRequestId(requestId string) *Client {
@@ -87,9 +89,9 @@ func (c *Client) SetTransport(transport *http.Transport) {
 	c.HttpClient.Transport = transport
 }
 
-func (op *Operation) SetOperation(method string, Url string) {
+func (op *Operation) SetOperation(method string, URL *url.URL) {
 	op.Method = method
-	op.Url = Url
+	op.Url = URL.String()
 }
 
 func (c *Client) SetLogPath(path string) error {

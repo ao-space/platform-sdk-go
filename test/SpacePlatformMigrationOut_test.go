@@ -12,8 +12,8 @@ func TestSpacePlatformImmigrate(t *testing.T) {
 	resp, err := client.SpacePlatformMigrationOut(&platform.SpacePlatformMigrationOutRequest{
 		UserDomainRouteInfos: []platform.UserDomainRouteInfo{
 			platform.UserDomainRouteInfo{
-				UserId:             "xx",
-				UserDomainRedirect: "xxx.xx",
+				UserId:             "1",
+				UserDomainRedirect: "userone.ao.space",
 			},
 		}})
 	require.NoError(t, err)

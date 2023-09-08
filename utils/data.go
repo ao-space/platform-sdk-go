@@ -3,7 +3,6 @@ package utils
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -14,13 +13,15 @@ func GetBody(resp *http.Response, body interface{}) error {
 	if err != nil {
 		return err
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		var Err Error
 		if err = json.Unmarshal([]byte(respBody.String()), &Err); err != nil {
 			return err
 		}
-		return fmt.Errorf("%v: %v", Err.Code, Err.Message)
+		return &Err
 	}
+	
 	if err = json.Unmarshal([]byte(respBody.String()), body); err != nil {
 		return err
 	}

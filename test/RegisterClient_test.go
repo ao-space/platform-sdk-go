@@ -10,9 +10,9 @@ import (
 func TestRegisterClient(t *testing.T) {
 	t.Run("ObtainBoxRegKey", TestObtainBoxRegKey)
 	resp, err := client.RegisterClient(&platform.RegisterClientRequest{
-		UserId:     "xxx",
-		ClientUUID: "xxx",
-		ClientType: "xxx",
+		UserId:     "1",
+		ClientUUID: "1",
+		ClientType: "client_auth",
 	})
 	require.NoError(t, err)
 	require.Contains(t, utils.ToString(resp), "userId")
