@@ -42,9 +42,11 @@ func (c *Client) RegisterUser(input *RegisterUserRequest) (*RegisterUserResponse
 	if err != nil {
 		return nil, err
 	}
-	output := RegisterUserResponse{}
-	if err = utils.GetBody(response, &output); err != nil {
+
+	output := new(RegisterUserResponse)
+	if err = utils.GetBody(response, output); err != nil {
 		return nil, err
 	}
-	return &output, nil
+	
+	return output, nil
 }

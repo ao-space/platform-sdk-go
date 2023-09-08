@@ -35,5 +35,6 @@ func (c *Client) DeleteClient(input *DeleteClientRequest) error {
 		err = utils.GetBody(resp, nil)
 		return err
 	}
+
 	return nil
 }

@@ -27,9 +27,11 @@ func (c *Client) DeleteUser(userID string) error {
 	if err != nil {
 		return err
 	}
+
 	if resp.StatusCode != 204 {
 		Err := utils.GetBody(resp, nil)
 		return Err
 	}
+	
 	return nil
 }

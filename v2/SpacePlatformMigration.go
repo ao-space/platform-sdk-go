@@ -50,10 +50,12 @@ func (c *Client) SpacePlatformMigration(input *SpacePlatformMigrationRequest) (*
 	if err != nil {
 		return nil, err
 	}
-	output := SpacePlatformMigrationResponse{}
-	err = utils.GetBody(resp, &output)
+
+	output := new(SpacePlatformMigrationResponse)
+	err = utils.GetBody(resp, output)
 	if err != nil {
 		return nil, err
 	}
-	return &output, nil
+	
+	return output, nil
 }

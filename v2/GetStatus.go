@@ -30,10 +30,12 @@ func (c *Client) GetStatus() (*GetStatusResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	output := GetStatusResponse{}
-	err = utils.GetBody(response, &output)
+
+	output := new(GetStatusResponse)
+	err = utils.GetBody(response, output)
 	if err != nil {
 		return nil, err
 	}
-	return &output, nil
+
+	return output, nil
 }

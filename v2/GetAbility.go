@@ -39,9 +39,8 @@ func (c *Client) GetAbility() (*GetAbilityResponse, error) {
 		return nil, err
 	}
 
-	output := GetAbilityResponse{}
-	err = utils.GetBody(response, &output)
-
+	output := new(GetAbilityResponse)
+	err = utils.GetBody(response, output)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +63,7 @@ func (c *Client) GetAbility() (*GetAbilityResponse, error) {
 	c.Ability = ability
 	c.mu.Unlock()
 
-	return &output, nil
+	return output, nil
 }
 
 func (c *Client) FlushAbilityWithDuration(duration time.Duration) func() {

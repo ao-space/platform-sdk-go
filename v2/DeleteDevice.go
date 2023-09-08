@@ -27,9 +27,11 @@ func (c *Client) DeleteDevice() error {
 	if err != nil {
 		return err
 	}
+
 	if resp.StatusCode != http.StatusNoContent {
 		err = utils.GetBody(resp, nil)
 		return err
 	}
+	
 	return nil
 }

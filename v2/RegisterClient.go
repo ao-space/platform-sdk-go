@@ -40,10 +40,12 @@ func (c *Client) RegisterClient(input *RegisterClientRequest) (*RegisterClientRe
 	if err != nil {
 		return nil, err
 	}
-	output := RegisterClientResponse{}
-	err = utils.GetBody(resp, &output)
+
+	output := new(RegisterClientResponse)
+	err = utils.GetBody(resp, output)
 	if err != nil {
 		return nil, err
 	}
-	return &output, nil
+
+	return output, nil
 }

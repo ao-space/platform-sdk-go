@@ -28,7 +28,7 @@ func (c *Client) GenerateUserDomain(input *GenerateUserDomainRequest) (*Generate
 	URL := new(url.URL)
 	copier.Copy(URL, c.BaseURL)
 	URL = URL.JoinPath(path)
-	
+
 	op := new(Operation)
 	op.SetOperation(http.MethodPost, URL)
 
@@ -38,10 +38,11 @@ func (c *Client) GenerateUserDomain(input *GenerateUserDomainRequest) (*Generate
 		return nil, err
 	}
 
-	output := GenerateUserDomainResponse{}
-	err = utils.GetBody(resp, &output)
+	output := new(GenerateUserDomainResponse)
+	err = utils.GetBody(resp, output)
 	if err != nil {
 		return nil, err
 	}
-	return &output, nil
+
+	return output, nil
 }

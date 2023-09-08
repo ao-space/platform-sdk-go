@@ -40,9 +40,9 @@ func (c *Client) RegisterDevice() (*RegisterDeviceResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	output := RegisterDeviceResponse{}
-	if err = utils.GetBody(resp, &output); err != nil {
+	output := new(RegisterDeviceResponse)
+	if err = utils.GetBody(resp, output); err != nil {
 		return nil, err
 	}
-	return &output, nil
+	return output, nil
 }

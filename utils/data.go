@@ -21,10 +21,11 @@ func GetBody(resp *http.Response, body interface{}) error {
 		}
 		return &Err
 	}
-	
+
 	if err = json.Unmarshal([]byte(respBody.String()), body); err != nil {
 		return err
 	}
+	
 	return nil
 }
 

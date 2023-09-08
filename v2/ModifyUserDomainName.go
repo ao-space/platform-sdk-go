@@ -42,10 +42,12 @@ func (c *Client) ModifyUserDomain(input *ModifyUserDomainRequest) (*ModifyUserDo
 	if err != nil {
 		return nil, err
 	}
-	output := ModifyUserDomainResponse{}
-	err = utils.GetBody(resp, &output)
+
+	output := new(ModifyUserDomainResponse)
+	err = utils.GetBody(resp, output)
 	if err != nil {
 		return nil, err
 	}
-	return &output, nil
+
+	return output, nil
 }
