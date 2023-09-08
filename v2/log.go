@@ -20,9 +20,7 @@ func init() {
 		Logger.Info("Failed to logs to file, using default stderr")
 	}
 
-	// 设置日志格式为JSON格式
 	Logger.SetFormatter(&logrus.JSONFormatter{})
 
-	// 设置日志级别为InfoLevel
 	Logger.SetLevel(logrus.InfoLevel)
 }

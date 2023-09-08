@@ -1,4 +1,4 @@
-[English](https://github.com/big-dust/platform-sdk-go/blob/dev/README.md) | 简体中文
+[English](./README.md) | 简体中文
 
 # platform-sdk-go
 
@@ -262,7 +262,7 @@ func main() {
 
 ### API参考
 
-- [SDK初始化和配置](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/cn/API%E5%8F%82%E8%80%83.md#1-sdk%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE)
-- [主要操作的结构和方法](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/cn/API%E5%8F%82%E8%80%83.md#2-%E4%B8%BB%E8%A6%81%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%B9%E6%B3%95)
-- [常量](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/cn/API%E5%8F%82%E8%80%83.md#3-%E5%B8%B8%E9%87%8F)
-- [错误码](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/cn/API%E5%8F%82%E8%80%83.md#4-错误码)
+- [SDK初始化和配置](./docs/cn/API%E5%8F%82%E8%80%83.md#1-sdk%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE)
+- [主要操作的结构和方法](./docs/cn/API%E5%8F%82%E8%80%83.md#2-%E4%B8%BB%E8%A6%81%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%B9%E6%B3%95)
+- [常量](./docs/cn/API%E5%8F%82%E8%80%83.md#3-%E5%B8%B8%E9%87%8F)
+- [错误码](./docs/cn/API%E5%8F%82%E8%80%83.md#4-错误码)

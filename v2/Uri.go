@@ -12,6 +12,5 @@ const (
 	uriDeleteClient              = "/v2/platform/boxes/{box_uuid}/users/{user_id}/clients/{client_uuid}"
 	uriSpacePlatformMigration    = "/v2/platform/boxes/{box_uuid}/migration"
 	uriSpacePlatformMigrationOut = "/v2/platform/boxes/{box_uuid}/route"
-	uriGetAbility                = "/v2/platform/ability"
 	uriGetStatus                 = "/v2/platform/status"
 )

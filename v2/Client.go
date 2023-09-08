@@ -4,6 +4,7 @@ import (
 	"github.com/google/uuid"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -38,12 +39,7 @@ func NewClientWithHost(Host string, transport *http.Transport) (*Client, error) 
 
 	if transport == nil {
 		//默认连接池设置
-		transport = &http.Transport{
-			MaxIdleConns:        5,                // 最大空闲连接数
-			MaxIdleConnsPerHost: 2,                // 每个主机的最大空闲连接数
-			IdleConnTimeout:     30 * time.Second, // 空闲连接超时时间
-			TLSHandshakeTimeout: 10 * time.Second, // TLS握手超时时间
-		}
+		transport = NewDefaultTransport()
 	}
 
 	c := &Client{
@@ -51,7 +47,7 @@ func NewClientWithHost(Host string, transport *http.Transport) (*Client, error) 
 		mu:         sync.Mutex{},
 	}
 
-	c.SetHost(Host)
+	c.SetBaseUrl(Host)
 
 	_, err := c.GetAbility()
 
@@ -62,9 +58,24 @@ func NewClientWithHost(Host string, transport *http.Transport) (*Client, error) 
 	return c, nil
 }
 
-func (c *Client) SetHost(Host string) {
+func NewDefaultTransport() *http.Transport {
+	return &http.Transport{
+		MaxIdleConns:        5,                // 最大空闲连接数
+		MaxIdleConnsPerHost: 2,                // 每个主机的最大空闲连接数
+		IdleConnTimeout:     30 * time.Second, // 空闲连接超时时间
+		TLSHandshakeTimeout: 10 * time.Second, // TLS握手超时时间
+	}
+}
 
-	c.BaseUrl = "https://" + Host + "/v" + strconv.Itoa(ApiVersion)
+func (c *Client) SetBaseUrl(Host string) {
+
+	URL, _ := url.Parse(Host)
+	if !URL.IsAbs() {
+		c.BaseUrl = "https://" + Host + "/v" + strconv.Itoa(ApiVersion)
+		return
+	}
+
+	c.BaseUrl = Host + "/v" + strconv.Itoa(ApiVersion)
 }
 
 func (c *Client) SetRequestId(requestId string) *Client {

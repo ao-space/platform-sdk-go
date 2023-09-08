@@ -3,6 +3,7 @@ package platform
 import (
 	"github.com/ao-space/platform-sdk-go/utils"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -46,11 +47,11 @@ func (c *Client) GetAbility() (*GetAbilityResponse, error) {
 		if ability[api.Uri] == nil {
 			ability[api.Uri] = make(map[string]map[int]int)
 		}
-		if ability[api.Uri][api.Method] == nil {
-			ability[api.Uri][api.Method] = make(map[int]int)
+		if ability[api.Uri][strings.ToUpper(api.Method)] == nil {
+			ability[api.Uri][strings.ToUpper(api.Method)] = make(map[int]int)
 		}
 		for _, version := range api.CompatibleVersions {
-			ability[api.Uri][api.Method][version] = 1
+			ability[api.Uri][strings.ToUpper(api.Method)][version] = 1
 		}
 	}
 

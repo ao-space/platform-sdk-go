@@ -1,4 +1,4 @@
-English | [简体中文](https://github.com/big-dust/platform-sdk-go/blob/dev/README_cn.md)
+English | [简体中文](./README_cn.md)
 
 # platform-sdk-go
 
@@ -241,8 +241,8 @@ func main() {
 
 ### API Reference
 
-- [SDK Initialization and Configuration](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#1-sdk-initialization-and-configuration)
-- [Main Operation Structures and Methods](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#2-main-operation-structures-and-methods)
-- [Constants](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#3-constants)
-- [Error Code](https://github.com/big-dust/platform-sdk-go/blob/dev/docs/en/API%20Reference.md#4-error-code)
+- [SDK Initialization and Configuration](./docs/en/API%20Reference.md#1-sdk-initialization-and-configuration)
+- [Main Operation Structures and Methods](./docs/en/API%20Reference.md#2-main-operation-structures-and-methods)
+- [Constants](./docs/en/API%20Reference.md#3-constants)
+- [Error Code](./docs/en/API%20Reference.md#4-error-code)
 
