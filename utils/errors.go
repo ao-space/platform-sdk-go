@@ -9,3 +9,11 @@ type Error struct {
 func (err *Error) Error() string {
 	return err.Message
 }
+
+func FromError(err error) *Error {
+	Err, ok := err.(*Error)
+	if !ok {
+		return nil
+	}
+	return Err
+}
