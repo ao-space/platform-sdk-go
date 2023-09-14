@@ -2,7 +2,7 @@ package platform
 
 import (
 	"fmt"
-	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/big-dust/platform-sdk-go/utils"
 	"github.com/jinzhu/copier"
 	"net/http"
 	"net/url"
@@ -32,6 +32,6 @@ func (c *Client) DeleteDevice() error {
 		err = utils.GetBody(resp, nil)
 		return err
 	}
-	
+
 	return nil
 }

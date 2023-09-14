@@ -3,7 +3,7 @@ package platform
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/big-dust/platform-sdk-go/utils"
 	"github.com/jinzhu/copier"
 	"net/http"
 	"net/url"
@@ -47,6 +47,6 @@ func (c *Client) RegisterUser(input *RegisterUserRequest) (*RegisterUserResponse
 	if err = utils.GetBody(response, output); err != nil {
 		return nil, err
 	}
-	
+
 	return output, nil
 }

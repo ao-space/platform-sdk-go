@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/ao-space/platform-sdk-go/v2"
+	"github.com/big-dust/platform-sdk-go/v2"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
