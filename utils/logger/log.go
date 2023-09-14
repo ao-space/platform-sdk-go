@@ -1,4 +1,4 @@
-package platform
+package logger
 
 import (
 	"github.com/sirupsen/logrus"
@@ -13,7 +13,7 @@ func init() {
 
 	Logger.Info("Failed to logs to file, using default stderr")
 
-	file, err := os.OpenFile("./sdk.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	file, err := os.OpenFile("/tmp/logs/platform-sdk.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err == nil {
 		Logger.Out = file
 	} else {

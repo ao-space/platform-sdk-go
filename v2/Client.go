@@ -2,6 +2,7 @@ package platform
 
 import (
 	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/ao-space/platform-sdk-go/utils/logger"
 	"github.com/google/uuid"
 	"io"
 	"net/http"
@@ -98,10 +99,10 @@ func (op *Operation) SetOperation(method string, URL *url.URL) {
 func (c *Client) SetLogPath(path string) error {
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err == nil {
-		Logger.Out = file
+		logger.Logger.Out = file
 		return nil
 	} else {
-		Logger.Info("Failed to logs to file, using default stderr")
+		logger.Logger.Info("Failed to logs to file, using default stderr")
 		return err
 	}
 }
@@ -132,9 +133,9 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 	response, err := c.HttpClient.Do(request)
 
 	if err != nil || response.StatusCode != http.StatusOK && response.StatusCode != http.StatusNoContent {
-		Logger.Error(time.Now().String()+": "+"request: ", request, " response: ", response)
+		logger.Logger.Error(time.Now().String()+": "+"request: ", request, " response: ", response)
 	} else {
-		Logger.Info(time.Now().String()+": "+"request: ", request, " response: ", response)
+		logger.Logger.Info(time.Now().String()+": "+"request: ", request, " response: ", response)
 	}
 
 	if err != nil {
