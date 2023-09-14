@@ -18,10 +18,10 @@ type ObtainBoxRegKeyRequest struct {
 
 type ObtainBoxRegKeyResponse struct {
 	BoxUUID      string         `json:"boxUUID"`
-	TokenResults []tokenResults `json:"tokenResults"`
+	TokenResults []TokenResults `json:"tokenResults"`
 }
 
-type tokenResults struct {
+type TokenResults struct {
 	ServiceId string    `json:"serviceId"`
 	BoxRegKey string    `json:"boxRegKey"`
 	ExpiresAt time.Time `json:"expiresAt"`
@@ -32,7 +32,7 @@ func (c *Client) ObtainBoxRegKey(input *ObtainBoxRegKeyRequest) (*ObtainBoxRegKe
 	if !c.IsAvailable(uriObtainBoxRegKey, http.MethodPost) {
 		return nil, fmt.Errorf("the ability is not available: [%v] %v ", http.MethodPost, uriObtainBoxRegKey)
 	}
-	
+
 	path := "/platform/auth/box_reg_keys"
 
 	URL := new(url.URL)
@@ -51,7 +51,7 @@ func (c *Client) ObtainBoxRegKey(input *ObtainBoxRegKeyRequest) (*ObtainBoxRegKe
 	}
 
 	c.BoxUUID = output.BoxUUID
-	c.BoxRegKey = output.TokenResults[0].BoxRegKey
+	c.TokenResults = &output.TokenResults[0]
 
 	return output, nil
 }

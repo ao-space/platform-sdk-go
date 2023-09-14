@@ -21,13 +21,13 @@ const (
 )
 
 type Client struct {
-	HttpClient *http.Client
-	BoxUUID    string
-	BoxRegKey  string
-	RequestId  string
-	BaseURL    *url.URL
-	Ability    map[string]map[string]map[int]int
-	mu         sync.Mutex
+	HttpClient   *http.Client
+	BoxUUID      string
+	RequestId    string
+	TokenResults *TokenResults
+	BaseURL      *url.URL
+	Ability      map[string]map[string]map[int]int
+	mu           sync.Mutex
 }
 
 type Operation struct {
@@ -125,8 +125,8 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 
 	request.Header.Set("Request-Id", c.RequestId)
 
-	if c.BoxRegKey != NULL {
-		request.Header.Set("Box-Reg-key", c.BoxRegKey)
+	if c.TokenResults.BoxRegKey != NULL {
+		request.Header.Set("Box-Reg-key", c.TokenResults.BoxRegKey)
 	}
 
 	response, err := c.HttpClient.Do(request)
