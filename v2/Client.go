@@ -126,7 +126,7 @@ func (c *Client) Send(op *Operation, input []byte) (*http.Response, error) {
 
 	request.Header.Set("Request-Id", c.RequestId)
 
-	if c.TokenResults.BoxRegKey != NULL {
+	if c.TokenResults != nil && c.TokenResults.BoxRegKey != NULL {
 		request.Header.Set("Box-Reg-key", c.TokenResults.BoxRegKey)
 	}
 
