@@ -1,30 +1,30 @@
-English | [简体中文](./README_cn.md)
+[English](./README.md) | 简体中文
 
 # platform-sdk-go
 
-## Introduction
+## 简介
 
-Golang version SDK for accessing the fundamental services on the Ao.Space platform.
+用于访问傲空间平台侧基础服务的Golang版SDK。
 
-## Installation
+## 安装
 
-1. Install using `go get`
+1. 使用 `go get` 安装
 
    ```bash
    go get github.com/ao-space/platform-sdk-go/v2
    ```
 
-2. Import into your code
+2. 导入到你的代码
 
    ```bash
    import "github.com/ao-space/platform-sdk-go/v2"
    ```
 
-## Quick Start
+## 快速开始
 
-Each interface has a corresponding Request structure and a Response structure. For example, the `ObtainBoxRegKey` interface has corresponding request and response structures named `ObtainBoxRegKeyRequest` and `ObtainBoxRegKeyResponse`, respectively.
+每个接口都有一个对应的 Request 结构和一个 Response 结构。例如获取访问令牌接口 ObtainBoxRegKey 有对应的请求结构体 ObtainBoxRegKeyRequest 和返回结构体 ObtainBoxRegKeyResponse 。
 
-Below is an example of how to use the SDK for obtaining an access token.
+下面以获取访问令牌接口为例，介绍 SDK 的基础用法。
 
 ```go
 package main
@@ -37,14 +37,13 @@ import (
 
 func main() {
     
-	// Create a client: specify the Host of the platform's fundamental
-    // service and optionally set the transport manually
+	//创建客户端：需要指定平台侧基础服务的Host 和 选择是否手动设置transport
 	client := platform.NewClientWithHost(platform.AoSpaceDomain, nil)
     
-	// Optionally set the request ID for the most recent request
+	//可选手动设置最近一次请求的requestId
 	client.SetRequestId("XXXXX")
     
-	// Request parameters
+	//请求参数
 	input := &platform.ObtainBoxRegKeyRequest{
 		BoxUUID:    "XXXXX",
 		ServiceIds: []string{"XXXXX"},
@@ -58,13 +57,13 @@ func main() {
 }
 ```
 
-## Documentation
+## 文档
 
-### SDK Functionality Examples
+### SDK功能示例
 
-1. Obtain Box_Reg_Key
+1. 获取访问令牌
 
-   - Used to authenticate the identity of the device on the space platform and generate `box_reg_keys`.
+   - 用于空间平台认证设备身份，并生成访问令牌 `box_reg_key`，其它接口都需要在获取访问令牌后使用。
 
    ```go
    client = platform.NewClientWithHost("XXXXXX", nil)
@@ -80,9 +79,9 @@ func main() {
    fmt.Println(resp)
    ```
 
-2. Register Device
+2. 注册设备
 
-   - Register AO.space device, and the space platform assigns network client information to it
+   - 注册傲空间设备，空间平台为其分配 network client 信息。
 
    ```go
    resp, err := client.RegisterDevice()
@@ -93,9 +92,9 @@ func main() {
    fmt.Println(resp)
    ```
 
-3. Delete Device
+3. 删除设备
 
-   - Delete the registration information of AO.space device, including user registration information, client registration information, network resources, etc
+   - 删除傲空间设备注册信息，包含用户注册信息、Client注册信息、网络资源等。
 
    ```go
    err := client.DeleteDevice()
@@ -105,16 +104,16 @@ func main() {
    }
    ```
 
-4. Register User
+4. 注册用户
 
-   - Register users and synchronize their binding clients
+   - 注册用户，同步注册用户的绑定客户端
 
    ```go
    resp, err := client.RegisterUser(&platform.RegisterUserRequest{
-   	UserID:     "XXX", // User ID
-   	Subdomain:  "XXX", //The subdomain name specified by the user
-       UserType:   "XXX", //User type (administrator, member), value: user_admin、user_member
-   	ClientUUID: "XXX", //The UUID of the client
+   	UserID:     "XXX", //用户ID
+   	Subdomain:  "XXX", //用户被指定的子域名
+       UserType:   "XXX", //取值: user_admin,user_member
+   	ClientUUID: "XXX", //客户端的 UUID
    })
    if err != nil {
    	fmt.Println(err)
@@ -123,13 +122,13 @@ func main() {
    fmt.Println(resp)
    ```
 
-5. Generate User Domain Name
+5. 申请用户域名
 
-   - Generate the user's subdomain name, and the subdomain name is unique globally
+   - 申请用户的子域名，子域名全局唯一性
 
    ```go
    resp, err := client.GenerateUserDomain(&platform.GenerateUserDomainRequest{
-   	EffectiveTime: "XXX", //Validity period, in seconds, up to 7 days
+   	EffectiveTime: "XXX", //有效期，单位秒，最长7天
    })
    if err != nil {
    	fmt.Println(err)
@@ -138,9 +137,9 @@ func main() {
    fmt.Println(resp)
    ```
 
-6. Modify User Domain Name
+6. 修改用户域名
 
-   - Modify the user's subdomain name, still retaining the user's historical subdomain name
+   - 修改用户的子域名，仍然保留用户的历史域名
 
    ```go
    resp, err := client.ModifyUserDomain(&platform.ModifyUserDomainRequest{
@@ -154,9 +153,9 @@ func main() {
    fmt.Println(resp)
    ```
 
-7. Delete User
+7. 删除用户
 
-   - Delete user registration information, including client registration information, etc
+   - 删除用户注册信息，包含Client注册信息等
 
    ```go
    err := client.DeleteUser("your userId")
@@ -166,9 +165,9 @@ func main() {
    }
    ```
 
-8. Register Client
+8. 注册客户端
 
-   - Register Client
+   - 注册客户端
 
    ```go
    resp, err := client.RegisterClient(&platform.RegisterClientRequest{
@@ -183,9 +182,9 @@ func main() {
    fmt.Println(resp)
    ```
 
-9. Delete Client
+9. 删除客户端
 
-   - Delete client registration information
+   - 删除客户端注册信息
 
    ```go
    err := client.DeleteClient(&platform.DeleteClientRequest{
@@ -198,9 +197,9 @@ func main() {
    }
    ```
 
-10. Space Platform Migration
+10. 空间平台迁入
 
-    - Used to migrate AO.space device data to the new space platform
+    - 用于向新空间平台迁入傲空间设备数据
 
     ```go
     resp, err := client.SpacePlatformMigration(&platform.SpacePlatformMigrationRequest{
@@ -225,24 +224,45 @@ func main() {
     }
     ```
 
-11. Space Platform Migration Out
+11. 空间平台迁出
 
-    - Used for domain name redirection on old space platforms
+    - 用于旧空间平台进行域名重定向
 
     ```go
     resp, err := client.SpacePlatformMigrationOut(&platform.SpacePlatformMigrationOutRequest{
     	UserDomainRouteInfos: []platform.UserDomainRouteInfo{
     		platform.UserDomainRouteInfo{
     			UserId:             "XXX",
-    			UserDomainRedirect: "XXX", //Redirected user domain name
+    			UserDomainRedirect: "XXX", //重定向的用户域名
     		},
     	}})
+    if err != nil {
+    	fmt.Println(err)
+    	return
+    }
     ```
 
-### API Reference
+12. 获取平台能力
 
-- [SDK Initialization and Configuration](./docs/en/API%20Reference.md#1-sdk-initialization-and-configuration)
-- [Main Operation Structures and Methods](./docs/en/API%20Reference.md#2-main-operation-structures-and-methods)
-- [Constants](./docs/en/API%20Reference.md#3-constants)
-- [Error Code](./docs/en/API%20Reference.md#4-error-code)
+    - 用户获取平台所具有的api
 
+    ```go
+    resp, err := client.GetAbility()
+    if err != nil {
+    	fmt.Println(err)
+    	return
+    }
+    ```
+
+13. 定时刷新平台的能力
+
+    ```go
+    go client.FlushAbilityWithDuration(time.Minute)()
+    ```
+
+### API参考
+
+- [SDK初始化和配置](./docs/cn/API%E5%8F%82%E8%80%83.md#1-sdk%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE)
+- [主要操作的结构和方法](./docs/cn/API%E5%8F%82%E8%80%83.md#2-%E4%B8%BB%E8%A6%81%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%B9%E6%B3%95)
+- [常量](./docs/cn/API%E5%8F%82%E8%80%83.md#3-%E5%B8%B8%E9%87%8F)
+- [错误码](./docs/cn/API%E5%8F%82%E8%80%83.md#4-错误码)
