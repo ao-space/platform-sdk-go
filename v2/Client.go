@@ -1,8 +1,8 @@
 package platform
 
 import (
-	"github.com/aospace/platform-sdk-go/utils"
-	"github.com/aospace/platform-sdk-go/utils/logger"
+	"github.com/ao-space/platform-sdk-go/utils"
+	"github.com/ao-space/platform-sdk-go/utils/logger"
 	"github.com/google/uuid"
 	"io"
 	"net/http"

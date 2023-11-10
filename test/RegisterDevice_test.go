@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/aospace/platform-sdk-go/utils"
+	"github.com/ao-space/platform-sdk-go/utils"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

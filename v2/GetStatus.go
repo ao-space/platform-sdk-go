@@ -2,7 +2,7 @@ package platform
 
 import (
 	"fmt"
-	"github.com/aospace/platform-sdk-go/utils"
+	"github.com/ao-space/platform-sdk-go/utils"
 	"github.com/jinzhu/copier"
 	"net/http"
 	"net/url"
