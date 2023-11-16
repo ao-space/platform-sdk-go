@@ -1,4 +1,4 @@
-module github.com/big-dust/platform-sdk-go
+module github.com/ao-space/platform-sdk-go
 
 go 1.19
 
