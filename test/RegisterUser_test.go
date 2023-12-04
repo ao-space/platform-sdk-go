@@ -1,8 +1,8 @@
 package test
 
 import (
+	"github.com/ao-space/platform-sdk-go"
 	"github.com/ao-space/platform-sdk-go/utils"
-	"github.com/ao-space/platform-sdk-go/v2"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 	"testing"
